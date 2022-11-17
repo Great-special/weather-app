@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%zs_)6vh1#lc145gt*hck)&p$583+z@@q19)j_&7u94=59wab$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['weather-source.up.railway.app']
+ALLOWED_HOSTS = ['weather-source.up.railway.app', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://weather-source.up.railway.app','https://127.0.0.1']
 
@@ -122,11 +122,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-# tells django where the static folder is located
-STATICFILES_DIRS = [BASE_DIR/'static']
+# tells django where the static folder is located "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# use this it work's best for production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
